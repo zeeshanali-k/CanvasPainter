@@ -7,13 +7,27 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.Q
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.compose.ui.graphics.Color
 import androidx.core.graphics.BitmapCompat
+import com.devscion.canvaspainter.models.PaintBrush
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
 object AppUtils {
-    fun saveBitmap(context: Context, bitmap: Bitmap)  {
+
+    val PEN_COLORS = listOf(
+        Color.Black, Color.Red, Color.Blue, Color.Green,
+        Color.Gray, Color.DarkGray, Color.DarkGray,
+        Color.Cyan, Color.Magenta, Color.Yellow
+    )
+
+    val PENS = MutableList(PEN_COLORS.size) {
+        PaintBrush(it, PEN_COLORS[it])
+    }.toList()
+
+
+    fun saveBitmap(context: Context, bitmap: Bitmap) {
 //        Getting images path
         val imagesCollection =
             if (SDK_INT >= Q) {
