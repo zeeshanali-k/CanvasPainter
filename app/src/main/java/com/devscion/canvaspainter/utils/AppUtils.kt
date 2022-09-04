@@ -7,7 +7,9 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.Q
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.core.graphics.BitmapCompat
 import com.devscion.canvaspainter.models.PaintBrush
 import java.io.File
@@ -25,6 +27,29 @@ object AppUtils {
     val PENS = MutableList(PEN_COLORS.size) {
         PaintBrush(it, PEN_COLORS[it])
     }.toList()
+
+    fun createPath(points: List<Offset>) = Path().apply {
+        if (points.size > 1) {
+            var oldPoint: Offset? = null
+            this.moveTo(points[0].x, points[0].y)
+            for (i in 1 until points.size) {
+                val point: Offset = points[i]
+                oldPoint?.let {
+                    val midPoint = calculateMidpoint(it, point)
+                    if (i == 1) {
+                        this.lineTo(midPoint.x, midPoint.y)
+                    } else {
+                        this.quadraticBezierTo(it.x, it.y, midPoint.x, midPoint.y)
+                    }
+                }
+                oldPoint = point
+            }
+            oldPoint?.let { this.lineTo(it.x, oldPoint.y) }
+        }
+    }
+
+    private fun calculateMidpoint(start: Offset, end: Offset) =
+        Offset((start.x + end.x) / 2, (start.y + end.y) / 2)
 
 
     fun saveBitmap(context: Context, bitmap: Bitmap) {
