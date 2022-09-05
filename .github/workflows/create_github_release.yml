@@ -26,14 +26,20 @@ jobs:
         with:
           name: app
           path: app/build/outputs/apk/debug/app-debug.apk
-
+      - name : Retrieve Version
+        run: |
+          echo "::set-output name=VERSION_NAME::$(${{github.workspace}}/gradlew -q printVersionName)"
+        id: android_version
+      - name: Get version
+        run: |
+          echo "version_name=${{steps.android_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_RELEASE }}
         with:
-          tag_name: canvas_painter_${{ github.run_id }}
+          tag_name: canvas_painter_${{env.version_name}}
           release_name: "Canvas Painter"
           draft: false
           prerelease: false
