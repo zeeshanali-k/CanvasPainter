@@ -10,30 +10,23 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.devscion.canvaspainter.components.PainterToolbar
 
 @Composable
 fun CanvasPainter(
     modifier: Modifier = Modifier,
     painterController: PainterController
 ) {
-    Scaffold(modifier = modifier) {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopStart) {
+    Box(modifier, contentAlignment = Alignment.TopStart) {
 //                        Paint Section
-            Column(Modifier.fillMaxSize()) {
-                CanvasPainterBoard(
-                    painterController,
-                    Modifier.fillMaxWidth()
-                        .weight(1f)
-                )
-                PensSection(painterController = painterController)
-            }
-//                        Other
-            Button(onClick = {
-                painterController.saveBitmap()
-            }) {
-                Text("Save")
-            }
-
+        Column(Modifier.fillMaxSize()) {
+            PainterToolbar(painterController = painterController)
+            CanvasPainterBoard(
+                painterController,
+                Modifier.fillMaxWidth()
+                    .weight(1f)
+            )
+            PensSection(painterController = painterController)
         }
     }
 }

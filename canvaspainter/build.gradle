@@ -3,7 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'maven-publish'
 }
-
+ext {
+    version_name = 'v1.0.0'
+}
 android {
     compileSdk 33
 
@@ -74,4 +76,7 @@ afterEvaluate {
             }
         }
     }
+}
+task printVersionName {
+    println project.ext.version_name
 }
