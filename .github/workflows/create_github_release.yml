@@ -39,7 +39,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_RELEASE }}
         with:
-          tag_name: canvas_painter_${{env.version_name}}
+          tag_name: ${{env.version_name}}
           release_name: "Canvas Painter"
           draft: false
           prerelease: false
