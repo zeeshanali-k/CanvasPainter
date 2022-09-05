@@ -4,7 +4,7 @@ plugins {
     id 'maven-publish'
 }
 ext {
-    version_name = 'v1.0.0'
+    version_name = '1.0.0'
 }
 android {
     compileSdk 33
@@ -71,7 +71,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.devscion'
                 artifactId = 'canvaspainter'
-                version = "1.0"
+                version = "1.0.0"
 
             }
         }
