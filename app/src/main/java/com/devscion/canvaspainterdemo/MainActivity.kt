@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
 
             val painterController = remember {
                 PainterController().apply {
-                    maxStrokeWidth = 100f
+//                    maxStrokeWidth = 100f
                 }
             }
             CanvasPainterTheme {

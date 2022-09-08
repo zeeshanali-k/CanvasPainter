@@ -5,7 +5,7 @@ plugins {
     id 'maven-publish'
 }
 ext {
-    version_name = '1.0.0'
+    version_name = '1.0.1'
 //    group = "tech.dev-scion"
 //    archivesBaseName = "canvaspainter"
 //    artifactId = "canvaspainter"
@@ -88,7 +88,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'tech.dev-scion'
                 artifactId = 'canvaspainter'
-                version = "1.0.0"
+                version = "1.0.1"
 
             }
         }
