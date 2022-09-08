@@ -14,6 +14,8 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
+
+
 rootProject.name = "Canvas Painter"
 include ':app'
-include ':canvaspainter'
+include ':CanvasPainter'

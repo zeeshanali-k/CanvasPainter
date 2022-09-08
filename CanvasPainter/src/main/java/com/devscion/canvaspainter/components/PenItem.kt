@@ -2,6 +2,7 @@ package com.devscion.canvaspainter.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,16 +16,17 @@ import com.devscion.canvaspainter.R
 import com.devscion.canvaspainter.models.PaintBrush
 
 @Composable
-fun PenItem(modifier: Modifier = Modifier,paintBrush: PaintBrush) {
+fun PenItem(modifier: Modifier = Modifier, paintBrush: PaintBrush) {
     Box {
         Image(
-            painterResource(R.drawable.ic_baseline_brush_24),
-            modifier = modifier.width(60.dp)
-                .rotate(135f),
+            painterResource(if (paintBrush.id == -1) R.drawable.color_wheel else R.drawable.ic_baseline_brush_24),
+            modifier = modifier.width(if (paintBrush.id == -1) 50.dp else 60.dp)
+                .rotate(135f)
+                .padding(horizontal = if (paintBrush.id == -1) 10.dp else 0.dp),
             alignment = Alignment.Center,
             contentDescription = null,
             contentScale = ContentScale.Fit,
-            colorFilter = ColorFilter.tint(paintBrush.color)
+            colorFilter = if (paintBrush.id == -1) null else ColorFilter.tint(paintBrush.color)
         )
     }
 }

@@ -18,7 +18,9 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             val painterController = remember {
-                PainterController()
+                PainterController().apply {
+                    maxStrokeWidth = 100f
+                }
             }
             CanvasPainterTheme {
                 CanvasPainter(

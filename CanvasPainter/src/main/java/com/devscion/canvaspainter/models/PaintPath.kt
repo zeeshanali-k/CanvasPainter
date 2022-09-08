@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 
 data class PaintPath(
 //    val path: Path,
-    val points : SnapshotStateList<Offset>,
+    val points: SnapshotStateList<Offset>,
+    val stroke: Float,
     val color: Color
 )

@@ -11,6 +11,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import com.devscion.canvaspainter.models.PaintBrush
+import com.devscion.canvaspainter.models.StorageOptions
 import java.io.FileOutputStream
 
 object AppUtils {
@@ -23,6 +24,8 @@ object AppUtils {
 
     val PENS = MutableList(PEN_COLORS.size) {
         PaintBrush(it, PEN_COLORS[it])
+    }.apply {
+        add(0, PaintBrush(-1, Color.Transparent))
     }.toList()
 
     fun createPath(points: List<Offset>) = Path().apply {
@@ -49,7 +52,7 @@ object AppUtils {
         Offset((start.x + end.x) / 2, (start.y + end.y) / 2)
 
 
-    fun saveBitmap(context: Context, bitmap: Bitmap) {
+    fun saveBitmap(context: Context, bitmap: Bitmap,storageOptions: StorageOptions) {
 //        Getting images path
         val imagesCollection =
             if (SDK_INT >= Q) {
@@ -68,7 +71,7 @@ object AppUtils {
             if (SDK_INT >= Q) {
                 put(
                     MediaStore.Images.ImageColumns.RELATIVE_PATH,
-                    "${Environment.DIRECTORY_DCIM}/Canvas Painter"
+                    "${Environment.DIRECTORY_DCIM}/${storageOptions.saveDirectoryName}"
                 )
                 put(MediaStore.Images.ImageColumns.IS_PENDING, 1)
             }

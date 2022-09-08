@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ZK/AndroidStudioProjects/CanvasPainter/app/src/main/res/drawable/ic_baseline_brush_24.xml" value="0.1755" />
+        <entry key="..\:/Users/ZK/AndroidStudioProjects/CanvasPainter/canvaspainter/src/main/res/drawable/ic_baseline_adjust_24.xml" value="0.1755" />
         <entry key="..\:/Users/ZK/AndroidStudioProjects/CanvasPainter/canvaspainter/src/main/res/drawable/ic_baseline_brush_24.xml" value="0.133" />
       </map>
     </option>
@@ -13,5 +14,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="Canvas_Painter.CanvasPainter" />
+      </set>
+    </option>
   </component>
 </project>

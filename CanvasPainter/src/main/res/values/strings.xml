@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="invalid_interface">onBitmapGenerated Interface Not Implemented</string>
+</resources>
