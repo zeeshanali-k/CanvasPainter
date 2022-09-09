@@ -1,18 +1,45 @@
-[![](https://jitpack.io/v/zeeshanali-k/CanvasPainter.svg)](https://jitpack.io/#zeeshanali-k/CanvasPainter)
+[![Maven Central](https://img.shields.io/maven-central/v/tech.dev-scion/canvaspainter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22tech.dev-scion%22%20AND%20a:%22canvaspainter%22)
 
 # CanvasPainter
 A Jetpack Compose Paint app using Compose Canvas with multiple features and flexibility
 
 ## Usage
-<p>Add this to your project level build.gradle or in new versions of gradle in settings.gradle under repositories section:</p>
+<p>Add this to your project level "build.gradle" or in newer versions of gradle in "settings.gradle" under repositories section:</p>
 
  ```groovy
-maven { url 'https://jitpack.io' }
-
+repositories {
+   mavenCentral()
+}
 ```
 <p>Add this to your module level build.gradle file:</p>
 
 ```groovy
-implementation 'com.github.zeeshanali-k:CanvasPainter:TAG'
+implementation 'tech.dev-scion:canvaspainter:TAG'
 ```
 <p>Replace TAG with library version</p>
+
+<p>Create <b>PainterController</b> Object.</p>
+
+```groovy
+val painterController = remember {
+      PainterController().apply {
+        maxStrokeWidth = 100f //Max Stroke a user can set using stroke selection slider
+        showToolbar = true
+        //Optional
+        storageOptions = StorageOptions( 
+            "My Painter", //Your directory name where images should be saved
+            shouldSaveByDefault = true // "true" means you want to save image on clicking save and "false" want a bitmap returned when clicked save
+            //in case of false you need to implement an interface "OnBitmapGenerated"
+        )
+     }
+  }
+```
+
+<p>Add CanvasPainter composable to your layout</p>
+
+```kotlin
+CanvasPainter(
+      Modifier.fillMaxSize(),
+      painterController
+   )
+```
