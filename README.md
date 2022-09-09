@@ -18,7 +18,7 @@ implementation 'tech.dev-scion:canvaspainter:TAG'
 ```
 <p>Replace TAG with library version</p>
 
-<p>Create ```PainterController``` Object.</p>
+<p>Create <b>PainterController</b> Object.</p>
 ```kotlin
 val painterController = remember {
       PainterController().apply {
