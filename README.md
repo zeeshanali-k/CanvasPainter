@@ -8,7 +8,7 @@ A Jetpack Compose Paint app using Compose Canvas with multiple features and flex
 
  ```groovy
 repositories {
- mavenCentral()
+   mavenCentral()
 }
 ```
 <p>Add this to your module level build.gradle file:</p>
@@ -19,7 +19,8 @@ implementation 'tech.dev-scion:canvaspainter:TAG'
 <p>Replace TAG with library version</p>
 
 <p>Create <b>PainterController</b> Object.</p>
-```kotlin
+
+```groovy
 val painterController = remember {
       PainterController().apply {
         maxStrokeWidth = 100f
@@ -33,7 +34,7 @@ val painterController = remember {
 ```
 
 <p>Add CanvasPainter composabel to your layout</p>
-```kotlin
+```groovy
 CanvasPainter(
       Modifier.fillMaxSize(),
       painterController
