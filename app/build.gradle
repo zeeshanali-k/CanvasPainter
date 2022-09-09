@@ -59,9 +59,9 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
-//    implementation project(path: ':CanvasPainter')
+    implementation project(path: ':CanvasPainter')
 
     //    Canvas Painter Library
-    implementation 'com.github.zeeshanali-k:CanvasPainter:1.0.0'
+//    implementation 'tech.dev-scion:canvaspainter:1.0.0'
 }
 

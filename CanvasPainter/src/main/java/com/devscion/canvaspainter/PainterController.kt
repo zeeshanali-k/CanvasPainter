@@ -129,4 +129,9 @@ class PainterController {
         isStrokeSelection.value = isStrokeSelection.value.not()
     }
 
+    fun reset() {
+        undonePath.value = paintPath.value
+        paintPath.value = listOf()
+    }
+
 }

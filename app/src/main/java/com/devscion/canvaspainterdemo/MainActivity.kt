@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.devscion.canvaspainter.CanvasPainter
 import com.devscion.canvaspainter.PainterController
+import com.devscion.canvaspainter.models.StorageOptions
 import com.devscion.canvaspainterdemo.ui.theme.CanvasPainterTheme
 
 private const val TAG = "MainActivity"
@@ -19,7 +20,12 @@ class MainActivity : ComponentActivity() {
 
             val painterController = remember {
                 PainterController().apply {
-//                    maxStrokeWidth = 100f
+                    maxStrokeWidth = 100f
+                    showToolbar = true
+                    storageOptions = StorageOptions(
+                        "My Painter",
+                        shouldSaveByDefault = true
+                    )
                 }
             }
             CanvasPainterTheme {

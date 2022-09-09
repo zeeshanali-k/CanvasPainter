@@ -1,15 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-//    id 'com.vanniktech.maven.publish'
-    id 'maven-publish'
+    id 'com.vanniktech.maven.publish'
 }
-ext {
-    version_name = '1.0.1'
-//    group = "tech.dev-scion"
-//    archivesBaseName = "canvaspainter"
-//    artifactId = "canvaspainter"
-}
+
 android {
     compileSdk 33
 
@@ -26,7 +20,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -71,144 +65,17 @@ dependencies {
     implementation 'com.godaddy.android.colorpicker:compose-color-picker:0.5.0'
 }
 
-//TODO publishing {
-//    repositories {
-//        maven {
-//            def releasesRepoUrl = "$buildDir/repos/releases"
-//            def snapshotsRepoUrl = "$buildDir/repos/snapshots"
-//            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-//        }
-//    }
-//}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'tech.dev-scion'
-                artifactId = 'canvaspainter'
-                version = "1.0.1"
-
-            }
+publishing {
+    repositories {
+        maven {
+            def releasesRepoUrl = "$buildDir/repos/releases"
+            def snapshotsRepoUrl = "$buildDir/repos/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
         }
     }
 }
 
 
 task printVersionName {
-    println project.ext.version_name
+    println VERSION_NAME
 }
-/*
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'canvaspainter'
-            from components.java
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
-            }
-            pom {
-                name = 'Canvas Painter'
-                description = 'Android Jetpack Compose Paint Library'
-                url = 'http://github.com/zeeshanali-k/CanvasPainter'
-                properties = [
-                        myProp: "value",
-                        "prop.with.dots": "anotherValue"
-                ]
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id ='zeeshanali-k'
-                        name ='Zeeshan Ali'
-                        email ='zeeshanalik73@gmail.com'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://github.com/zeeshanali-k/CanvasPainter.git'
-                    developerConnection = 'scm:git:ssh://github.com/zeeshanali-k/CanvasPainter.git'
-                    url = 'http://github.com/zeeshanali-k/CanvasPainter/'
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            // change URLs to point to your repos, e.g. http://my.org/repo
-            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
-            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-        }
-    }
-}
-
-signing {
-    sign publishing.publications.mavenJava
-}
-
-
-javadoc {
-    if(JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
-    }
-}
-*/
-
-//OLD
-/*
-uploadArchives {
-    repositories {
-        mavenJava(MavenPublication) {
-            beforeDeployment { MavenPublication deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'Canvas Painter'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                artifactId ext.artifactId
-                description 'Jetpack Compose Paint Library'
-                url 'https://github.com/zeeshanali-k/CanvasPainter'
-
-                scm {
-                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
-                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
-                    url 'http://foo.googlecode.com/svn/trunk/'
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'zeeshanali-k'
-                        name 'Zeeshan Ali'
-                        email 'zeeshanalik73@gmail.com'
-                    }
-                }
-            }
-        }
-    }
-}*/
