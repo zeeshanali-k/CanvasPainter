@@ -18,9 +18,21 @@ implementation 'tech.dev-scion:canvaspainter:TAG'
 ```
 <p>Replace TAG with library version</p>
 
-<p>Create <b>PainterController</b> Object.</p>
+<p>Create <b>PainterController</b> Object directly or by using below composable.</p>
 
-```groovy
+```kotlin
+val painterController = rememberCanvasPainterController(
+    maxStrokeWidth = 200f,
+    showToolbar = true, storageOptions = StorageOptions(shouldSaveByDefault = false),//setting false will return bitmap in below callback
+    Color.Red
+) {
+ // This will only be called when you set "shouldSaveByDefault = false" in storage options
+}
+```
+
+Direct Approach
+
+```kotlin
 val painterController = remember {
       PainterController().apply {
         maxStrokeWidth = 100f //Max Stroke a user can set using stroke selection slider
@@ -29,8 +41,10 @@ val painterController = remember {
         storageOptions = StorageOptions( 
             "My Painter", //Your directory name where images should be saved
             shouldSaveByDefault = true // "true" means you want to save image on clicking save and "false" want a bitmap returned when clicked save
-            //in case of false you need to implement an interface "OnBitmapGenerated"
-        )
+        ),
+        onBitmapGenerated = {
+          //Bitmap is returned here. This will only be called when you set "shouldSaveByDefault = false" in storage options
+        })
      }
   }
 ```
