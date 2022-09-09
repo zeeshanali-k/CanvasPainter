@@ -23,17 +23,19 @@ implementation 'tech.dev-scion:canvaspainter:TAG'
 ```groovy
 val painterController = remember {
       PainterController().apply {
-        maxStrokeWidth = 100f
+        maxStrokeWidth = 100f //Max Stroke a user can set using stroke selection slider
         showToolbar = true
-        storageOptions = StorageOptions(
-            "My Painter",
-            shouldSaveByDefault = true
+        //Optional
+        storageOptions = StorageOptions( 
+            "My Painter", //Your directory name where images should be saved
+            shouldSaveByDefault = true // "true" means you want to save image on clicking save and "false" want a bitmap returned when clicked save
+            //in case of false you need to implement an interface "OnBitmapGenerated"
         )
      }
   }
 ```
 
-<p>Add CanvasPainter composabel to your layout</p>
+<p>Add CanvasPainter composable to your layout</p>
 
 ```kotlin
 CanvasPainter(
