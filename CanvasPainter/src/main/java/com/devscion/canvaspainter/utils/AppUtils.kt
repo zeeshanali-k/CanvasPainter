@@ -2,8 +2,10 @@ package com.devscion.canvaspainter.utils
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build.VERSION.SDK_INT
+import android.os.Build.VERSION_CODES.M
 import android.os.Build.VERSION_CODES.Q
 import android.os.Environment
 import android.provider.MediaStore
@@ -13,8 +15,10 @@ import androidx.compose.ui.graphics.Path
 import com.devscion.canvaspainter.models.PaintBrush
 import com.devscion.canvaspainter.models.StorageOptions
 import java.io.FileOutputStream
+import java.io.IOException
+import java.util.jar.Manifest
 
-object AppUtils {
+internal object AppUtils {
 
     val PEN_COLORS = listOf(
         Color.Black, Color.Red, Color.Blue, Color.Green,
@@ -25,7 +29,7 @@ object AppUtils {
     val PENS = MutableList(PEN_COLORS.size) {
         PaintBrush(it, PEN_COLORS[it])
     }.apply {
-        add(0, PaintBrush(-1, Color.Transparent))
+        add(0, PaintBrush(color = Color.Transparent))
     }.toList()
 
     fun createPath(points: List<Offset>) = Path().apply {
@@ -52,8 +56,13 @@ object AppUtils {
         Offset((start.x + end.x) / 2, (start.y + end.y) / 2)
 
 
-    fun saveBitmap(context: Context, bitmap: Bitmap,storageOptions: StorageOptions) {
+    fun saveBitmap(context: Context, bitmap: Bitmap, storageOptions: StorageOptions) {
 //        Getting images path
+        if (SDK_INT >= M && context.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            throw IOException("Storage permission is not granted")
+        }
         val imagesCollection =
             if (SDK_INT >= Q) {
                 MediaStore.Images.Media.getContentUri(

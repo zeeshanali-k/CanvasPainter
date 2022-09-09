@@ -3,6 +3,6 @@ package com.devscion.canvaspainter.models
 import androidx.compose.ui.graphics.Color
 
 data class PaintBrush(
-    val id: Int,
+    internal val id: Int = -1,
     val color: Color
 )

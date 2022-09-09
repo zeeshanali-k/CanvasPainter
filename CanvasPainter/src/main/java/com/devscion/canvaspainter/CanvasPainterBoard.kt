@@ -39,7 +39,7 @@ internal fun CanvasPainterBoard(
                 .pointerInput(Unit) {
                     detectDragGestures(onDragStart = { offset ->
                         painterController.addPath(offset)
-                    }) { change, dragAmount ->
+                    }) { change, _ ->
                         painterController.updateLastPath(change.position)
                     }
                 }

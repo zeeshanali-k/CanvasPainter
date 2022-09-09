@@ -62,6 +62,6 @@ dependencies {
     implementation project(path: ':CanvasPainter')
 
     //    Canvas Painter Library
-//    implementation 'tech.dev-scion:canvaspainter:1.0.0'
+//    implementation 'tech.dev-scion:canvaspainter:1.0.1'
 }
 

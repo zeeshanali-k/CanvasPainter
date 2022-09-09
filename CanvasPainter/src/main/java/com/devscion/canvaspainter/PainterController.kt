@@ -2,43 +2,58 @@ package com.devscion.canvaspainter
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import com.devscion.canvaspainter.interfaces.OnBitmapGenerated
 import com.devscion.canvaspainter.models.PaintBrush
 import com.devscion.canvaspainter.models.PaintPath
 import com.devscion.canvaspainter.models.StorageOptions
 import com.devscion.canvaspainter.utils.AppUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.NullPointerException
 
-class PainterController {
+@Composable
+fun rememberCanvasPainterController(
+    maxStrokeWidth: Float = 50f,
+    showToolbar: Boolean = true,
+    storageOptions: StorageOptions = StorageOptions(),
+    color: Color? = null,
+    onBitmapGenerated: ((bitmap: Bitmap) -> Unit)? = null,
+) = remember {
+    PainterController(maxStrokeWidth, showToolbar, storageOptions, onBitmapGenerated).apply {
+        color?.let {
+            setCustomColor(color)
+        }
+    }
+}
+
+class PainterController(
+    var maxStrokeWidth: Float = 50f,
+    var showToolbar: Boolean = true,
+    var storageOptions: StorageOptions = StorageOptions(),
+    private val onBitmapGenerated: ((bitmap: Bitmap) -> Unit)? = null,
+) {
     private val TAG = "PainterController"
 
     //  Variables
-    var onBitmapGenerated: OnBitmapGenerated? = null
-    var maxStrokeWidth = 50f
-    var showToolbar = true
-    var storageOptions = StorageOptions()
-
+//    var onBitmapGenerated: OnBitmapGenerated? = null
 
     internal val strokeWidth = MutableStateFlow(5f)
     internal val isStrokeSelection = MutableStateFlow(false)
 
     internal val paintPath = MutableStateFlow(listOf<PaintPath>())
     internal val undonePath = MutableStateFlow(listOf<PaintPath>())
-    val selectedColor = MutableStateFlow(AppUtils.PENS[1])
+    internal val selectedColor = MutableStateFlow(AppUtils.PENS[1])
 
     private val canvasPaintView = MutableStateFlow<View?>(null)
 
@@ -76,7 +91,7 @@ class PainterController {
     }
 
     internal fun saveBitmap() {
-        if(paintPath.value.isEmpty()){
+        if (paintPath.value.isEmpty()) {
             return
         }
         CoroutineScope(Dispatchers.IO).launch {
@@ -93,7 +108,7 @@ class PainterController {
                         .show()
                 }
             } else {
-                onBitmapGenerated?.onBitmap(bitmap)
+                onBitmapGenerated?.invoke(bitmap)
                     ?: throw NullPointerException(view.context.getString(R.string.invalid_interface))
             }
         }
@@ -103,7 +118,7 @@ class PainterController {
         strokeWidth.value = width
     }
 
-    internal fun setCustomColor(color: Color) {
+    fun setCustomColor(color: Color) {
         selectedColor.value = PaintBrush(-1, color)
     }
 
@@ -125,11 +140,12 @@ class PainterController {
         }.toList()
     }
 
-    fun toggleStrokeSelection() {
+    internal fun toggleStrokeSelection() {
         isStrokeSelection.value = isStrokeSelection.value.not()
     }
 
-    fun reset() {
+
+    internal fun reset() {
         undonePath.value = paintPath.value
         paintPath.value = listOf()
     }
