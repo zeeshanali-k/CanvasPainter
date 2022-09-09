@@ -34,7 +34,8 @@ val painterController = remember {
 ```
 
 <p>Add CanvasPainter composabel to your layout</p>
-```groovy
+
+```kotlin
 CanvasPainter(
       Modifier.fillMaxSize(),
       painterController
