@@ -1,7 +1,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/tech.dev-scion/canvaspainter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22tech.dev-scion%22%20AND%20a:%22canvaspainter%22)
 
 # CanvasPainter
-A Jetpack Compose Paint app using Compose Canvas with multiple features and flexibility
+A Jetpack Compose Painting Helper Library using Jetpack Compose Canvas with multiple features and flexibility
 
 ## Usage
 <p>Add this to your project level "build.gradle" or in newer versions of gradle in "settings.gradle" under repositories section:</p>
