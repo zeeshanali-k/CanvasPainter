@@ -3,6 +3,9 @@
 # CanvasPainter
 A Jetpack Compose Painting Helper Library using Jetpack Compose Canvas with multiple features and flexibility
 
+<img src="/screenshots/ss_1.png" width="250" height="500"> <img src="/screenshots/ss_2.png" width="250" height="500">
+<img src="/screenshots/ss_3.png" width="250" height="500">
+
 ## Usage
 <p>Add this to your project level "build.gradle" or in newer versions of gradle in "settings.gradle" under repositories section:</p>
 
