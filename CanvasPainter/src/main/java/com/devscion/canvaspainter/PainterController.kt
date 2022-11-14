@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import java.lang.NullPointerException
 
 @Composable
@@ -102,7 +103,18 @@ class PainterController(
             view.draw(canvas)
 
             if (storageOptions.shouldSaveByDefault) {
-                AppUtils.saveBitmap(view.context, bitmap, storageOptions)
+                try {
+
+                    AppUtils.saveBitmap(view.context, bitmap, storageOptions)
+                } catch (e: IOException) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            view.context, "Cannot Save Painting",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+                }
                 withContext(Dispatchers.Main) {
                     Toast.makeText(view.context, "Saved", Toast.LENGTH_LONG)
                         .show()
