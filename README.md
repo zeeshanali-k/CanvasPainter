@@ -2,6 +2,7 @@
 
 # CanvasPainter
 A Jetpack Compose Painting Helper Library (Inspired by Drawbox) using Jetpack Compose Canvas with multiple features and flexibility
+Inspired by <a href="https://github.com/akshay2211/DrawBox">Drawbox</a>
 
 
 <img src="/screenshots/ss_1.png" width="250" height="500"> <img src="/screenshots/ss_2.png" width="250" height="500">
