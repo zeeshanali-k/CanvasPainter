@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,7 +42,8 @@ class MainActivity : ComponentActivity() {
             )
             CanvasPainterTheme {
                 CanvasPainter(
-                    Modifier.fillMaxSize(),
+                    Modifier.fillMaxSize()
+                        .background(Color.Black),
                     painterController
                 )
             }

@@ -35,7 +35,6 @@ internal fun CanvasPainterBoard(
             Canvas(Modifier
                 .fillMaxSize()
                 .clipToBounds()
-                .background(Color.White)
                 .pointerInput(Unit) {
                     detectDragGestures(onDragStart = { offset ->
                         painterController.addPath(offset)

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CanvasPainterCMP-js">
+    <output-path>$PROJECT_DIR$/CanvasPainterCMP/build/libs</output-path>
+    <root id="archive" name="CanvasPainterCMP-js.jar">
+      <element id="module-output" name="Canvas_Painter.CanvasPainterCMP.jsMain" />
+    </root>
+  </artifact>
+</component>

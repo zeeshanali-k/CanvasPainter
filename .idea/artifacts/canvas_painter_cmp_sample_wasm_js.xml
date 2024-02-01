@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="canvas_painter_cmp_sample-wasm-js">
+    <output-path>$PROJECT_DIR$/canvas_painter_cmp_sample/build/libs</output-path>
+    <root id="archive" name="canvas_painter_cmp_sample-wasm-js.jar" />
+  </artifact>
+</component>

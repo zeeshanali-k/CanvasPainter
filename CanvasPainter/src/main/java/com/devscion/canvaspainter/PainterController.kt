@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -134,7 +135,7 @@ class PainterController(
         selectedColor.value = PaintBrush(-1, color)
     }
 
-    internal fun undo() {
+    fun undo() {
         paintPath.value = paintPath.value.toMutableList().apply {
             undonePath.value = undonePath.value
                 .toMutableList().apply {
@@ -144,7 +145,7 @@ class PainterController(
         }.toList()
     }
 
-    internal fun redo() {
+    fun redo() {
         paintPath.value = paintPath.value.toMutableList().apply {
             add(undonePath.value.last())
             undonePath.value = undonePath.value
@@ -157,7 +158,7 @@ class PainterController(
     }
 
 
-    internal fun reset() {
+    fun reset() {
         undonePath.value = paintPath.value
         paintPath.value = listOf()
     }

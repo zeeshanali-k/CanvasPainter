@@ -14,16 +14,15 @@ fun CanvasPainter(
     modifier: Modifier = Modifier,
     painterController: PainterController
 ) {
-    Box(modifier, contentAlignment = Alignment.TopStart) {
 //                        Paint Section
-        Column(Modifier.fillMaxSize()) {
-            if (painterController.showToolbar)
-                PainterToolbar(painterController = painterController)
-            CanvasPainterBoard(
-                painterController,
-                Modifier.fillMaxWidth()
-                    .weight(1f)
-            )
-        }
+    Column(modifier) {
+        if (painterController.showToolbar)
+            PainterToolbar(painterController = painterController)
+        CanvasPainterBoard(
+            painterController,
+            modifier
+                .fillMaxWidth()
+                .weight(1f)
+        )
     }
 }
