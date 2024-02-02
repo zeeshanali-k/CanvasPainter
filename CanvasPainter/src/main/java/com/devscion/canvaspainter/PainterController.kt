@@ -145,6 +145,15 @@ class PainterController(
         }.toList()
     }
 
+    fun generateBitmap(): Bitmap {
+        val view = canvasPaintView.value!!
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        canvas.drawColor(Color.White.toArgb())
+        view.draw(canvas)
+        return bitmap
+    }
+
     fun redo() {
         paintPath.value = paintPath.value.toMutableList().apply {
             add(undonePath.value.last())
