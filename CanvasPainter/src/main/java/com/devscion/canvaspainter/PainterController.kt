@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -22,7 +21,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
-import java.lang.NullPointerException
 
 @Composable
 fun rememberCanvasPainterController(
@@ -143,6 +141,10 @@ class PainterController(
                 }.toList()
             this.removeLast()
         }.toList()
+    }
+
+    fun isCanvasEmpty(): Boolean {
+        return paintPath.value.isEmpty()
     }
 
     fun generateBitmap(): Bitmap {
