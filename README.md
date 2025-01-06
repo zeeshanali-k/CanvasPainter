@@ -1,7 +1,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/tech.dev-scion/canvaspainter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22tech.dev-scion%22%20AND%20a:%22canvaspainter%22)
 
 # CanvasPainter
-A Jetpack Compose Painting Helper Library (Inspired by Drawbox) using Jetpack Compose Canvas with multiple features and flexibility
+A Jetpack Compose Painting Helper Library (Inspired by Drawbox) using Jetpack Compose Canvas with multiple features and flexibility. It also supprots Compose Multiform for Android and iOS (for now).
 Inspired by <a href="https://github.com/akshay2211/DrawBox">Drawbox</a>
 
 
@@ -19,7 +19,12 @@ repositories {
 <p>Add this to your module level build.gradle file:</p>
 
 ```groovy
-implementation 'tech.dev-scion:canvaspainter:TAG'
+implementation 'tech.dev-scion:canvaspainter:<latest-version>'
+```
+If you are using compose multiplatform add it to commonMain sourceset's dependencies section:
+
+```kotlin
+implementation("tech.dev-scion:canvaspainter:<latest-version>")
 ```
 <p>Replace TAG with library version</p>
 
@@ -28,11 +33,9 @@ implementation 'tech.dev-scion:canvaspainter:TAG'
 ```kotlin
 val painterController = rememberCanvasPainterController(
     maxStrokeWidth = 200f,
-    showToolbar = true, storageOptions = StorageOptions(shouldSaveByDefault = false),//setting false will return bitmap in below callback
+    showToolbar = true,
     Color.Red
-) {
- // This will only be called when you set "shouldSaveByDefault = false" in storage options
-}
+)
 ```
 
 Direct Approach
@@ -41,15 +44,8 @@ Direct Approach
 val painterController = remember {
       PainterController().apply {
         maxStrokeWidth = 100f //Max Stroke a user can set using stroke selection slider
-        showToolbar = true
-        //Optional
-        storageOptions = StorageOptions( 
-            "My Painter", //Your directory name where images should be saved
-            shouldSaveByDefault = true // "true" means you want to save image on clicking save and "false" want a bitmap returned when clicked save
-        ),
-        onBitmapGenerated = {
-          //Bitmap is returned here. This will only be called when you set "shouldSaveByDefault = false" in storage options
-        })
+        showToolbar = true,
+       )
      }
   }
 ```
@@ -63,5 +59,10 @@ CanvasPainter(
    )
 ```
 
+Other PainterController functions:
+```kotlin
+painterController.getCanvasAsImageBitmap() //You can get the bitmap of canvas using this function
+ImageBitmap.toByteArray() //This is an extension function for ImageBitmap included in project to convert ImageBitmap to ByteArray
+```
 
 <a href="https://www.buymeacoffee.com/devscion"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=ZeeshanAli&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"></a>
