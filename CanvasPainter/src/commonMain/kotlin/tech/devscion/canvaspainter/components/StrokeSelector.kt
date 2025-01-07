@@ -13,14 +13,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import canvaspainterroot.canvaspainter.generated.resources.Res
 import canvaspainterroot.canvaspainter.generated.resources.ic_baseline_done_24
-import tech.devscion.canvaspainter.PainterController
 import org.jetbrains.compose.resources.painterResource
 import tech.devscion.canvaspainter.models.PaintBrush
 

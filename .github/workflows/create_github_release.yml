@@ -10,22 +10,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
 
       - name: Grant Permission to Execute
         run: chmod +x gradlew
       - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
+        run: bash ./gradlew sample:assembleDebug --stacktrace
         
       - name: Upload APK to Github Artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
-          name: app
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: sample
+          path: sample/build/outputs/apk/debug/sample-debug.apk
       - name : Retrieve Version
         run: |
           echo "::set-output name=VERSION_NAME::$(${{github.workspace}}/gradlew -q printVersionName)"
@@ -51,6 +51,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_RELEASE }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./app/build/outputs/apk/debug/app-debug.apk
-          asset_name: app-debug.apk
+          asset_path: ./sample/build/outputs/apk/debug/sample-debug.apk
+          asset_name: sample-debug.apk
           asset_content_type: application/zip
