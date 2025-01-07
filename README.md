@@ -1,8 +1,8 @@
 [![Maven Central](https://img.shields.io/maven-central/v/tech.dev-scion/canvaspainter.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22tech.dev-scion%22%20AND%20a:%22canvaspainter%22)
 
 # CanvasPainter
-A Jetpack Compose Painting Helper Library (Inspired by Drawbox) using Jetpack Compose Canvas with multiple features and flexibility. It also supprots Compose Multiform for Android and iOS (for now).
-Inspired by <a href="https://github.com/akshay2211/DrawBox">Drawbox</a>
+A Jetpack Compose Painting Helper Library (Inspired by Drawbox) using Jetpack Compose Canvas with multiple features and flexibility. It also supprots Compose Multiform for Android, iOS, Desktop and Web (Wasm).
+<p>Inspired by <a href="https://github.com/akshay2211/DrawBox">Drawbox</a></p>
 
 
 <img src="/screenshots/ss_1.png" width="250" height="500"> <img src="/screenshots/ss_2.png" width="250" height="500">
