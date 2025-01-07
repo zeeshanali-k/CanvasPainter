@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CanvasPainter-desktop">
+    <output-path>$PROJECT_DIR$/CanvasPainter/build/libs</output-path>
+    <root id="archive" name="CanvasPainter-desktop.jar">
+      <element id="module-output" name="CanvasPainterRoot.CanvasPainter.desktopMain" />
+    </root>
+  </artifact>
+</component>
