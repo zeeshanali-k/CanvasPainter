@@ -62,7 +62,8 @@ CanvasPainter(
 Other PainterController functions:
 ```kotlin
 painterController.getCanvasAsImageBitmap() //You can get the bitmap of canvas using this function
-ImageBitmap.toByteArray() //This is an extension function for ImageBitmap included in project to convert ImageBitmap to ByteArray
+ImageBitmap.toByteArray() //This is an extension function for ImageBitmap included in project to convert ImageBitmap to ByteArray.
+Note: ImageBitmap.toByteArray() returns null for web. Its implementation is pending.
 ```
 
 Libraries Used by CanvasPainter:
