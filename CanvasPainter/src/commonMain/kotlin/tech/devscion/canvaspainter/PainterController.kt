@@ -13,6 +13,7 @@ import tech.devscion.canvaspainter.models.PaintBrush
 import tech.devscion.canvaspainter.models.PaintPath
 import tech.devscion.canvaspainter.utils.AppUtils
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import tech.devscion.canvaspainter.utils.AppUtils.createPath
 
@@ -23,12 +24,16 @@ fun rememberCanvasPainterController(
     showToolbar: Boolean = true,
     color: Color? = null,
     onPathUpdate: ((Path) -> Unit)? = null,
+    onDragStart: (() -> Unit)? = null,
+    onDragEnd: (() -> Unit)? = null,
 ) = remember {
     PainterController(
-        maxStrokeWidth,
-        minStrokeWidth,
-        showToolbar,
-        onPathUpdate = onPathUpdate
+        maxStrokeWidth = maxStrokeWidth,
+        minStrokeWidth = minStrokeWidth,
+        showToolbar = showToolbar,
+        onPathUpdate = onPathUpdate,
+        onDragStart = onDragStart,
+        onDragEnd = onDragEnd
     ).apply {
         color?.let {
             setCustomColor(color)
@@ -41,6 +46,8 @@ class PainterController(
     var minStrokeWidth: Float = 5f,
     var showToolbar: Boolean = true,
     private val onPathUpdate: ((Path) -> Unit)? = null,
+    private val onDragStart: (() -> Unit)? = null,
+    private val onDragEnd: (() -> Unit)? = null,
 ) {
 
     internal var canvasSize = Size.Unspecified
@@ -55,7 +62,12 @@ class PainterController(
         selectedColor.value = paintBrush
     }
 
-    internal fun addPath(offset: Offset) {
+    fun getCurrentPaintPath() = paintPath.value
+
+    fun observePaintPath() = paintPath.asStateFlow()
+
+    internal fun addPaintPath(offset: Offset) {
+        onDragStart?.invoke()
         undonePath.value = emptyList()
         paintPath.update {
             it.toMutableList().apply {
@@ -69,6 +81,10 @@ class PainterController(
             }
         }
         onPathUpdate?.invoke(createPath(paintPath.value.last().points))
+    }
+
+    internal fun onDragEnd() {
+        this.onDragEnd?.invoke()
     }
 
     internal fun updateLastPath(offset: Offset) {
@@ -108,6 +124,26 @@ class PainterController(
 
     fun isCanvasEmpty(): Boolean {
         return paintPath.value.isEmpty()
+    }
+
+    fun addPaintPath(
+        points: List<Offset>,
+        color: Color,
+        stroke: Float,
+    ) {
+        if (points.isEmpty()) return
+        paintPath.update {
+            it.toMutableList().apply {
+                add(
+                    PaintPath(
+                        points = mutableStateListOf<Offset>().apply {
+                            addAll(points)
+                        },
+                        color = color, stroke = stroke,
+                    )
+                )
+            }
+        }
     }
 
     fun redo() {
